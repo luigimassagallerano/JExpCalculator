@@ -6,13 +6,13 @@ import com.mydevelopedworld.core.grammar.exception.VariableNotFoundException;
 
 public class Context {
 	
-	private HashMap<String, Integer> context = new HashMap<String, Integer>();
+	private HashMap<String, Double> context = new HashMap<String, Double>();
 	
-	public void assign(String var, int value){
+	public void assign(String var, double value){
 		this.context.put(var, value);
 	}
 	
-	public int lookup(String var) throws VariableNotFoundException{
+	public double lookup(String var) throws VariableNotFoundException{
 		if(!this.context.containsKey(var)){
 			throw new VariableNotFoundException("Variable: ["+var+"] not found in Context!");
 		}
