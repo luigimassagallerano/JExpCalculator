@@ -5,71 +5,70 @@ import com.mydevelopedworld.core.grammar.Context;
 import com.mydevelopedworld.core.grammar.visitors.ExpressionVisitor;
 
 public class Operator implements ExpressionNode {
-	
-	private Operators operator;
-	private ExpressionNode left, right;
 
-	public Operator(ExpressionNode left, ExpressionNode right, Operators o){
-		this.left = left;
-		this.right = right;
-		this.operator = o;
-	}
+    private Operators operator;
+    private ExpressionNode left, right;
 
-	@Override
-	public double evaluate(Context c) {
-		switch(this.operator){
-		case DIV:
-			return this.left.evaluate(c) / this.right.evaluate(c);
-		case MUL:
-			return this.left.evaluate(c) * this.right.evaluate(c);
-		case ADD:
-			return this.left.evaluate(c) + this.right.evaluate(c);
-		default:
-			return this.left.evaluate(c) - this.right.evaluate(c);
-		}
-	}
+    public Operator(ExpressionNode left, ExpressionNode right, Operators o) {
+        this.left = left;
+        this.right = right;
+        this.operator = o;
+    }
 
-	@Override
-	public void accept(ExpressionVisitor visitor) {
-		visitor.visit(this);	
-	}
+    @Override
+    public double evaluate(Context c) {
+        switch (this.operator) {
+            case DIV:
+                return this.left.evaluate(c) / this.right.evaluate(c);
+            case MUL:
+                return this.left.evaluate(c) * this.right.evaluate(c);
+            case ADD:
+                return this.left.evaluate(c) + this.right.evaluate(c);
+            default:
+                return this.left.evaluate(c) - this.right.evaluate(c);
+        }
+    }
 
-	public Operators getOperator() {
-		return this.operator;
-	}
+    @Override
+    public void accept(ExpressionVisitor visitor) {
+        visitor.visit(this);
+    }
 
-	public ExpressionNode getLeft() {
-		return this.left;
-	}
+    public Operators getOperator() {
+        return this.operator;
+    }
 
-	public ExpressionNode getRight() {
-		return this.right;
-	}
-	
-	public static enum Operators{ 
-		DIV { 
-			public String toString() {
-				return "/";
-			}	       
-		},
+    public ExpressionNode getLeft() {
+        return this.left;
+    }
 
-		MUL{ 
-			public String toString() {
-				return "*";
-			}
-		}, 
+    public ExpressionNode getRight() {
+        return this.right;
+    }
 
-		ADD{ 
-			public String toString() {
-				return "+";
-			}
-		},
+    public enum Operators {
+        DIV {
+            public String toString() {
+                return "/";
+            }
+        },
 
-		MINUS{ 
-			public String toString() {
-				return "-";
-			}
-		} 
-	};
+        MUL {
+            public String toString() {
+                return "*";
+            }
+        },
 
+        ADD {
+            public String toString() {
+                return "+";
+            }
+        },
+
+        MINUS {
+            public String toString() {
+                return "-";
+            }
+        }
+    }
 }
